@@ -4,7 +4,8 @@ const fs= require('fs')
 // fs.writeFileSync('./test.txt','Hello World, there')
 
  // ASync...
-//  fs.writeFileSync('./test.txt','Hello World, there',(err)=>{})
+//  fs.writeFile('./test.txt','Hello World, there',(err)=>{}) // (err)=>{} parameter pass must in async operation
+//Async fs.writeFile() override the test.txt file created by fs.writeFileSync()
 
 
 // Sync...
@@ -19,7 +20,7 @@ const fs= require('fs')
 //         console.log(result)
 //  }) 
 
-// Remember we need argument for async oper ation
+// Remember we need argument for async operation
 
  fs.appendFileSync("./test.txt",`\n ${Date.now()} Heee`);
 

@@ -3,7 +3,8 @@ const crypto=require('crypto')
 
 const start=Date.now()
 
-process.env.UV_THREADPOOL_SIZE = 10 // to change the threadpool size which is by default 4
+process.env.UV_THREADPOOL_SIZE = 10 // to change the threadpool size which is by default 4 (4 means 4 cpu instensive tasks are done at once)
+
 setTimeout(()=> console.log("Hello this is Timer1"),0)
 setImmediate(()=> console.log("Hello this is Shubham Immediate"))
 
