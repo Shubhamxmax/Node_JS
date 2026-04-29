@@ -1,25 +1,32 @@
-1777385171122: GET / New Req Received
-1777385531980: GET /signup New Req Received
-1777385548015: GET /signup New Req Received
-1777385585356: GET /signup New Req Received
-1777385674025: GET /signup New Req Received
-1777396641032: GET / New Req Received
-1777396649652: GET / New Req Received
-1777397379527: GET / New Req Received
-1777397388475: GET / New Req Received
-1777397389204: GET / New Req Received
-1777397389354: GET / New Req Received
-1777397389552: GET / New Req Received
-1777397389795: GET / New Req Received
-1777397389982: GET / New Req Received
-1777397390162: GET / New Req Received
-1777397390327: GET / New Req Received
-1777397390522: GET / New Req Received
-1777397390680: GET / New Req Received
-1777397390900: GET / New Req Received
-1777397425846: GET / New Req Received
-1777397426871: GET / New Req Received
-1777397427056: GET / New Req Received
-1777397427216: GET / New Req Received
-1777397427436: GET / New Req Received
-1777397430931: GET / New Req Received
+//Version
+
+//
+^~5.2.1
+
+
+1st Part -> 5
+2nd Part -> 2
+3rd Part -> 2
+
+// 3rd Part (Last Part) - Minor Fixes (optional)
+// Example typo changes in express(minor change : not necessary to update)
+//5.2.2
+
+// 2nd Part - Recommended Bug Fixes(Security)
+//Little big changes than 3rd part (you have to update)
+//5.3.2
+
+
+// 3rd Major Release - Major / Breaking Update
+// If before when you wrote the code version is 4 and just next day or in future the version become 5 then updating version is not recommended(because major update can cause error in your present code which is written in version 4)
+
+
+
+//^ means the express version automatically update itself 
+means if it is 5.2.2 then it can automatically update itself till lesser than 6.0.0
+
+// ~ means only last bit can change or update automatically
+like 5.2.3
+like 5.2.4
+like 5.2.5
+but 5.3.3 No.....
