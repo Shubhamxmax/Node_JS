@@ -7,10 +7,11 @@
   "type": "commonjs",
   "main": "Hello.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node Hello.js"
-  },
-  "dependencies": {
-    "url": "^0.11.4"
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
+
+
+
+
+
