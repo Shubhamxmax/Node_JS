@@ -1,5 +1,7 @@
 const fs= require('fs')
+const os=require('os')
 
+console.log(os.cpus().length);// give the max thread pool size
 // Sync...
 // fs.writeFileSync('./test.txt','Hello World, there')
 

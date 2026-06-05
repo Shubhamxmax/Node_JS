@@ -6,7 +6,7 @@ const url = require("url");
 const myServer = http.createServer((req, res) => {
   // console.log("New Req Recorded");
   // console.log(req);// give all the information of client or user
-
+ console.log(req.headers)
   if (req.url === "/favicon.ico") return res.end();
   const log = `${Date.now()}: ${req.method} ${req.url} New Req Received\n`;
 
@@ -18,7 +18,7 @@ const myServer = http.createServer((req, res) => {
 
   // console.log(myUrl)
 
-  fs.appendFile("log.txt", log, (err, data) => {
+  fs.appendFile("log.txt", log, (err) => {
     switch (myUrl.pathname) {
       case "/":
         if (req.method === "GET") res.end("HomePage");
