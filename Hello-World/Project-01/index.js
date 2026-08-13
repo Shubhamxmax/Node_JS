@@ -1,9 +1,44 @@
 const express = require("express");
 const users = require("./MOCK_DATA.json"); // no export needed in .json file
 const fs = require('fs')
+const mongoose = require("mongoose")
 
 const app = express();
 const PORT = 5000;
+
+
+//Connection
+
+mongoose.connect("mongodb://127.0.0.1:27017/youtube-app-1")
+.then(() => console.log("MongoDB Connected"))
+.catch(err => console.log('Mongo Error'))
+
+// Schema
+const userSchema = new mongoose.Schema({
+    firstName:{
+        type: String,
+        required: true,
+    },
+    lastName:{
+        type: String,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    jobtitle: {
+        type:String
+    },
+    gender: {
+        type:String
+    }
+
+})
+
+const User = mongoose.model("user", userSchema )
+
+
 
 // // Routes
 
@@ -74,7 +109,8 @@ app.use((req, res, next) =>{
 
 app.get("/api/users", (req, res) => {
     console.log(req.headers); // seeing request headers
-    res.setHeader("myName", "Piyush Garg"); // creating my own header
+    res.setHeader("X-myName", "Piyush Garg"); // creating my own header
+    // Always add X to custom headers
     return res.json(users);
 });
 
@@ -82,8 +118,11 @@ app
     .route("/api/users/:id")
     .get((req, res) => {
         const id = Number(req.params.id);
+         const user = users.find((user) => user.id === id);
 
-        const user = users.find((user) => user.id === id);
+        if(!user)
+            return res.status(404).json({error:"user not found"})
+
 
         return res.json(user);
     })
@@ -96,13 +135,39 @@ app
         return res.json({ status: "Pending" });
     });
 
-    app.post("/api/users", (req, res) => {
+    app.post("/api/users", async (req, res) => {
     // TODO: Create new user
     const body = req.body;
-    users.push({...body, id: users.length + 1});
-    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
-    return res.json({ status: "pending" , id: users.length});
-});
+    
+    if(!body || 
+        !body.first_name ||!body.last_name ||!body.email ||!body.gender ||!body.job_title
+    ){
+        return res.status(400).json({ msg: "All fields are req..." });
+    }
+
+const result =   await User.create({
+          firstName: body.first_name,
+          lastName: body.last_name,
+          email:body.email,
+          gender:body.gender,
+          jobTitle: body.jobtitle
+
+    })
+    
+    console.log(result)
+
+   return res.status(201).json({msg: "success"});
+ 
+
+
+
+
+    // users.push({...body, id: users.length + 1});
+    // fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
+    // return res.status(201).json({ status: "pending" , id: users.length});
+    // });
+
+
 });
 
 
