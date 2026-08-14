@@ -21,3 +21,4 @@
 1786631572762: POST: /api/users
 1786631695722: POST: /api/users
 1786631719242: POST: /api/users
+1786707893198: GET: /api/users
