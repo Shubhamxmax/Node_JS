@@ -1,5 +1,7 @@
 const express = require("express");
 const path = require("path");
+const cookieParser = require('cookie-parser')
+const { restrictToLoggedinUserOnly,checkAuth} = require('./middlewares/auth')
 const {connectMongoDb} = require('./connection')
 const URL = require("./models/url")
 
@@ -25,14 +27,16 @@ connectMongoDb("mongodb://127.0.0.1:27017/short-url").then(()=>
 // middleware
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false})); // for form data
+app.use(express.urlencoded({ extended: false})); // for form data in .ejs file
+app.use(cookieParser()); // for parsing the cookie from browser
 
 
 
 
-app.use("/url", urlRoute);
-app.use("/",staticRoute);
+app.use("/url",restrictToLoggedinUserOnly, urlRoute);
 app.use("/user",userRoute);
+app.use("/",checkAuth,staticRoute);
+
 
 
 
